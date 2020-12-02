@@ -31,6 +31,7 @@ import (
 	"github.com/nntaoli-project/goex/okex"
 	"github.com/nntaoli-project/goex/poloniex"
 	"github.com/nntaoli-project/goex/zb"
+	"github.com/nntaoli-project/goex/hbtc"
 )
 
 type APIBuilder struct {
@@ -222,6 +223,13 @@ func (builder *APIBuilder) Build(exName string) (api API) {
 	case BINANCE:
 		//_api = binance.New(builder.client, builder.apiKey, builder.secretkey)
 		_api = binance.NewWithConfig(&APIConfig{
+			HttpClient:   builder.client,
+			Endpoint:     builder.endPoint,
+			ApiKey:       builder.apiKey,
+			ApiSecretKey: builder.secretkey})
+	case HBTC:
+		//_api = binance.New(builder.client, builder.apiKey, builder.secretkey)
+		_api = hbtc.NewWithConfig(&APIConfig{
 			HttpClient:   builder.client,
 			Endpoint:     builder.endPoint,
 			ApiKey:       builder.apiKey,
